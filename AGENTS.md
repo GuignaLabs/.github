@@ -21,7 +21,7 @@ Write public content in English and communicate with the owner in Spanish. Use d
 
 ## Branch, Commit & Pull Request Guidelines
 
-Use Gitflow: `main` represents published content, `develop` integrates upcoming changes, and `chore/<purpose>` branches contain maintenance work. Example: `chore/organization-profile`. Start maintenance branches from `develop` once the initial committed baseline exists. The repository initially has no commit history; do not describe planned branch conventions as historical practice.
+Use Gitflow: `main` represents published content, `develop` integrates upcoming changes, and `chore/<purpose>` branches contain maintenance work. Example: `chore/organization-profile`. Start maintenance branches from `develop`. Always squash `feature/*`, `chore/*`, and other working branches into `develop`, producing one commit per change. Integrate `develop` into `main` with a normal merge that preserves history; do not squash this promotion.
 
 When explicitly authorized to commit, use concise messages such as `chore: add organization profile`. Pull requests into `develop` should explain the change, its purpose, and validation. Link an issue when available; include a preview when visual presentation changes. Promote reviewed content to `main` through a release.
 
