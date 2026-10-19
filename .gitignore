@@ -1,0 +1,3 @@
+# guignalabs:local-config:begin
+*.workspace.*
+# guignalabs:local-config:end
