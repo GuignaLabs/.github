@@ -28,3 +28,24 @@ When explicitly authorized to commit, use concise messages such as `chore: add o
 ## Agent Instructions
 
 Preserve existing files and unrelated work. Do not commit, push, create remote branches, or change repository visibility without explicit owner authorization. Keep global Git and SSH configuration unchanged.
+
+<!-- guignalabs:begin -->
+## GuignaLabs Shared Instructions
+
+Before work, explicitly read `../AGENTS.md` and
+`../.workspace/company/workflow.md` when they exist; do not assume automatic
+instruction discovery across Git roots. When these company files are unavailable
+in an isolated clone, read the portable `.workspace/workflow.md` instead.
+Repository-local instructions refine the shared defaults; explicit user
+instructions authorize task-specific exceptions. Use
+`.workspace/templates/task.md` for a bounded task record when appropriate.
+
+Keep shared workflow and task records in ordinary Markdown filenames, such as
+`.workspace/workflow.md` and `task.md`. Reserve `*.workspace.*` names, such as
+`config.workspace.json`, for local configuration ignored by the repository's
+managed `.gitignore` block. Never put secrets or private records in portable files.
+
+The portable files are reviewed snapshots. If bootstrap `--check` reports drift,
+review the differences and update the affected snapshot, managed blocks and
+metadata together manually; bootstrap never overwrites a conflicting version.
+<!-- guignalabs:end -->
