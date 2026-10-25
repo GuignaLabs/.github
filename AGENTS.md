@@ -41,11 +41,26 @@ Repository-local instructions refine the shared defaults; explicit user
 instructions authorize task-specific exceptions. Use
 `.workspace/templates/task.md` for a bounded task record when appropriate.
 
-Follow the shared worktree lifecycle: new temporary product/organization checkouts
-use `.worktrees/<repository>/task-<id>-<purpose>/` under the company root. Record
-the owner/task and, after integration, actual worktree/branch retirement or a
-retention reason, responsible owner and review date. Preserve required local
-files/data and obtain the corresponding authority before Git or remote actions.
+Implement ordinary repository tasks in a dedicated worktree and branch from
+fetched `origin/develop`, using
+`.worktrees/<repository>/task-<id>-<purpose>/` under the company root. Record its
+owner/task/base SHA. Declared stack layers may use their recorded predecessor
+as base/target, keeping trunk `develop` and one worktree per layer. Task layers
+ultimately land by squash on `develop`; release MRs promote
+`develop` to `main` with a normal merge. Never push directly to either branch.
+Read `.workspace/development.md` for the shared branch catalog, review-size bands,
+stack dependencies and manual story closure. One issue can span many PRs; do not
+require line estimates or fixed PR counts when creating it. Prefer 400 changed
+lines, warn with a reason at 401–600, and split larger work. Follow the shared
+workflow's MR readiness, current-candidate CI and review duties.
+After confirming the MR is merged and dependents no longer need it, preserve
+needed local files/data, remove only its owned worktree/local/remote task branch,
+and verify/update the inventory; never delete `develop` or `main`. Keep task
+resources while the MR is unmerged or cleanup
+has a concrete preservation blocker; record owner and review date. The owner's
+standing direction covers scoped local worktree/branch setup and post-merge task
+cleanup. It does not authorize commits, publication, MR merge, unrelated deletion
+or cloud actions.
 
 Keep shared workflow and task records in ordinary Markdown filenames, such as
 `.workspace/workflow.md` and `task.md`. Reserve `*.workspace.*` names, such as
