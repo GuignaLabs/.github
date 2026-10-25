@@ -32,13 +32,20 @@ Preserve existing files and unrelated work. Do not commit, push, create remote b
 <!-- guignalabs:begin -->
 ## GuignaLabs Shared Instructions
 
-Before work, explicitly read `../AGENTS.md` and
-`../.workspace/company/workflow.md` when they exist; do not assume automatic
-instruction discovery across Git roots. When these company files are unavailable
+Before work, find the nearest checkout ancestor containing both `AGENTS.md` and
+`.workspace/company/workflow.md`, then explicitly read both. Grouped worktrees
+have a deeper company root; do not assume it is the immediate parent or rely on
+automatic instruction discovery across Git roots. When no company root exists
 in an isolated clone, read the portable `.workspace/workflow.md` instead.
 Repository-local instructions refine the shared defaults; explicit user
 instructions authorize task-specific exceptions. Use
 `.workspace/templates/task.md` for a bounded task record when appropriate.
+
+Follow the shared worktree lifecycle: new temporary product/organization checkouts
+use `.worktrees/<repository>/task-<id>-<purpose>/` under the company root. Record
+the owner/task and, after integration, actual worktree/branch retirement or a
+retention reason, responsible owner and review date. Preserve required local
+files/data and obtain the corresponding authority before Git or remote actions.
 
 Keep shared workflow and task records in ordinary Markdown filenames, such as
 `.workspace/workflow.md` and `task.md`. Reserve `*.workspace.*` names, such as

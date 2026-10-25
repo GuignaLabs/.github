@@ -5,18 +5,18 @@
       "rule": "*.workspace.*"
     },
     ".workspace/templates/task.md": {
-      "sha256": "697f9ba3c4bf15c016e7a679dd791cfeeefa3d94421bb35f8c76958a56b2712c",
+      "sha256": "5be268e0a85159434725f03e2dd6faa77dcadd98305a4d847a6ffbbd83d1f6df",
       "template": "templates/repository/task.md"
     },
     ".workspace/workflow.md": {
-      "sha256": "76fdb9173c4648e927d5a554b6189e21646207ad95b5b33e3c7e94b0e32a53af",
+      "sha256": "5da6aa2404d5a9ba60ffd7f6877c4caf3b7765f75432732686306c8f1787ede5",
       "template": "templates/repository/workflow.md"
     },
     "AGENTS.md": {
-      "managed_block_sha256": "400757546a133156caa8c01a557dda80754e11b01460dbcaad3b1b9fd6477523",
+      "managed_block_sha256": "d624a01c0c11b4f3286f4198a651df04e50fc53d8b59b645e35bcdfb9bfd81fe",
       "template": "templates/repository/AGENTS.md"
     }
   },
   "schema_version": 2,
-  "template_version": 5
+  "template_version": 7
 }
