@@ -40,7 +40,9 @@ does not exempt a product repository because it contains a `.workspace/` folder.
 Every integration requires a merge request (MR; pull request/PR on GitHub).
 Push only the task branch, open an ordinary MR against `develop`, and attach the actual
 scope, validation and limitations. Merge through the MR after required review
-and checks; squash task branches into `develop`. Promote `develop` to `main`
+and checks; the owner performs every merge manually. Agents must not merge,
+enable auto-merge or schedule a merge. Squash task branches into `develop`.
+Promote `develop` to `main`
 through a release MR with a normal merge preserving history. Never push directly
 or force-push to `develop` or `main`, including from a temporary integration
 branch. Permission to publish a task does not waive the MR route.
@@ -86,7 +88,8 @@ Unrelated primary-checkout work is not an implicit dependency or publication gra
 | Check | Required evidence |
 | --- | --- |
 | Identity and target | Repository, task/owner, task worktree, source branch, exact base SHA and intended target. Ordinary task MRs target `develop`; declared stack layers record the predecessor SHA/branch and trunk `develop`; release MRs promote `develop` to `main`. |
-| Authority and scope | Existing authorization covers the exact commit/push/MR actions being taken. Merge is included only when explicitly authorized; do not ask again for actions already covered. |
+| Authority and scope | Existing authorization covers the exact commit/push/MR actions being taken. Agents do not merge, enable auto-merge or schedule a merge; the owner performs merges manually. Do not ask again for publication actions already covered. |
+| PR metadata | Plan one primary `type:` label matching the main branch purpose and assignment to the verified owner. Read back each published PR's actual labels, assignee, source/head, target/base, state and auto-merge field before handover; preserve stack dependencies. |
 | Complete candidate | Intended files and dependencies are included. Generated source and controlled guidance/metadata match their inputs. No unrelated staged files, conflicts or local-only files enter the candidate. |
 | Behavioral evidence | Relevant repository checks pass on the actual candidate, including meaningful regression/boundary coverage for changed behavior. State skipped or unavailable checks and their impact; a narrower check does not establish full acceptance. |
 | API and documentation | Public behavior changes include the contract, synthetic examples, generated clients/types and affected guides in the same MR. Internal changes require prose only when reader instructions or external behavior change. Run the repository documentation/API gate. |
@@ -111,12 +114,14 @@ an earlier green push run is not sufficient evidence for a changed integration.
 Critical acceptance skipped by a green job remains unverified.
 
 Require the repository's applicable approvals and resolve blocking discussions.
-Name the responsible reviewer and authorized merge owner; follow the task's
+Name the responsible reviewer and verified human owner; follow the task's
 risk-based review/acceptance policy. An agent's review note is not a GitHub
 approval unless that approval was actually submitted and observed.
 Select squash for each task layer ultimately landing on `develop`, and a normal
-history-preserving merge for a release MR from `develop` to `main`. Merge through the MR under the existing
-explicit merge authority; never substitute a local integration push.
+history-preserving merge for a release MR from `develop` to `main`. Leave the
+PR open for the owner to merge manually after applicable checks and review.
+Neither a green pipeline, owner assignment nor the final stack layer grants
+an agent merge authority; never substitute a local integration push.
 
 #### After Merging
 
@@ -145,6 +150,27 @@ protected. Changing these settings needs the corresponding owner authority.
 GitHub semantics checked 2026-10-25: [current head and test-merge checks](https://docs.github.com/en/pull-requests/how-tos/merge-and-close-pull-requests/troubleshooting-required-status-checks),
 [MR/review rules](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/available-rules-for-rulesets)
 and [automatic head-branch deletion](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/managing-the-automatic-deletion-of-branches).
+
+### PR Classification, Assignment And Guide Adoption
+
+Apply one primary `type:` label to every PR and each stack layer: `type:feature`,
+`type:bug`, `type:docs`, `type:refactor`, `type:test`, `type:ci`, `type:build`,
+`type:perf` or `type:chore`. The development guide maps each ordinary prefix.
+Retain useful unrelated labels; missing-label creation and legacy-label
+deletion require separately scoped repository authority. A guide update grants
+no remote catalog or hosting-configuration authority.
+
+Assign each PR to the verified owner account. The current GuignaLabs owner is
+`jbasualdo`, verified on 2026-10-25; revalidate when the owner or authenticated
+account changes. Do not infer an account from the OS username. Assignment
+does not replace review approval. Leave each PR open for human review/merge.
+
+Inspect recorded task owners and pinned publication inputs before changing
+shared guides or portable versions. Coordinate adoption; do not rewrite
+another owner's active snapshots, metadata or historical proofs. Prepare the
+next candidate separately when necessary, then adopt its reviewed snapshots,
+managed blocks and metadata together. Report prepared, adopted, published
+and remotely enforced states separately.
 
 ### Development, Review Size And Story Acceptance
 

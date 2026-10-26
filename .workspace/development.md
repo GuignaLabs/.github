@@ -2,8 +2,10 @@
 
 Owner-adopted company development agreements, 2026-10-25. Apply them to every
 GuignaLabs project and repository, with checks appropriate to its actual stack.
-The [shared workflow](workflow.md) is the normative policy and authority boundary.
-This guide explains its delivery rules; it does not install hosting controls.
+Apply the [shared workflow](workflow.md) together with the owner-adopted delivery
+rules below. The current requirement for human-only merges takes precedence over
+earlier snapshot wording that allowed an agent to merge with authorization.
+This guide does not install hosting controls.
 
 ## Stories, tasks and pull requests
 
@@ -21,17 +23,17 @@ a coherent change, its relevant tests and documentation.
 
 Use the main purpose of the task to choose one ordinary prefix:
 
-| Prefix | Purpose |
-| --- | --- |
-| `feature/` | Add or extend a capability. |
-| `fix/` | Correct defective behavior. |
-| `docs/` | Change documentation only. |
-| `refactor/` | Restructure code while preserving behavior. |
-| `test/` | Add or improve tests as the main outcome. |
-| `ci/` | Change integration pipelines or checks. |
-| `build/` | Change compilation, packaging or build tooling. |
-| `perf/` | Improve performance with verification. |
-| `chore/` | Other maintenance that does not fit a more precise category. |
+| Prefix | Primary PR label | Purpose |
+| --- | --- | --- |
+| `feature/` | `type:feature` | Add or extend a capability. |
+| `fix/` | `type:bug` | Correct defective behavior. |
+| `docs/` | `type:docs` | Change documentation only. |
+| `refactor/` | `type:refactor` | Restructure code while preserving behavior. |
+| `test/` | `type:test` | Add or improve tests as the main outcome. |
+| `ci/` | `type:ci` | Change integration pipelines or checks. |
+| `build/` | `type:build` | Change compilation, packaging or build tooling. |
+| `perf/` | `type:perf` | Improve performance with verification. |
+| `chore/` | `type:chore` | Other maintenance that does not fit a more precise category. |
 
 Use `<type>/<issue-or-task-id>-<short-description>` in lowercase with hyphens.
 Synthetic examples: `feature/123-booking-rules`, `fix/123-session-recovery`,
@@ -64,9 +66,38 @@ stays local; a product's own `.workspace/` directory does not grant an exemption
 
 Publish only an authorized task branch, open its PR with the issue reference,
 scope, actual checks/evidence, limitations and relevant recovery information,
-then obtain the required review and authorized merge. Never push directly or
-force-push to `develop` or `main`. A passing check grants no publication or merge
+then obtain the required review and hand it to the owner for a manual merge.
+Agents must not merge, enable auto-merge or schedule a merge. Never push directly
+or force-push to `develop` or `main`. A passing check grants no publication
 authority. A merged PR alone does not establish acceptance of the whole story.
+
+## PR metadata and human handover
+
+Apply one primary `type:` label from the branch catalog to every PR, including
+each layer of a stack. Choose the main purpose; a feature containing tests and
+documentation still uses `type:feature`. For a release promotion, describe the
+aggregate purpose and choose the corresponding agreed type; do not invent a
+new label merely because `develop` is the source branch. Labels do not establish
+test results or approval. Retain useful unrelated labels. Creating missing labels
+or deleting legacy labels requires separately scoped repository authority;
+guide adoption does not authorize a catalog cleanup.
+
+Assign every PR to the verified owner's GitHub account. For the current
+GuignaLabs owner this is `jbasualdo`, verified on 2026-10-25; revalidate if the
+owner or authenticated account changes. Never infer the account from an OS
+username. Assignment identifies the recipient and does not substitute for review.
+
+Before handing a PR to the owner, read back its actual repository, source/head
+SHA, target/base, primary label, assignee, state and auto-merge field. Verify the
+immediate base, trunk and predecessor/successor links for each stack layer.
+Distinguish local checks from current hosted CI, report outstanding checks or
+blocking discussions, and leave the PR open for the owner's review and merge.
+Commits, pushes and PR creation/updates retain their own explicit authorization.
+
+The owner performs every merge manually. Neither authorization to publish,
+assignment, a green pipeline nor the final stack layer permits agent merging,
+auto-merge or scheduling. Keep worktrees and branches until the owner's merge
+is observed and the retention requirements below are satisfied.
 
 ## Review size
 
@@ -102,7 +133,7 @@ worktree, focused scope and checks. This is the explicit base/target exception:
 3. Link every PR to the same story and to its predecessor/successor PRs. Each
    PR number is stable; a display position such as `[2/3]` can change as work is
    discovered. Do not require a known total when creating the issue.
-4. Review only each layer's incremental diff. Integrate bottom-up, with one
+4. Review only each layer's incremental diff. The owner integrates bottom-up, with one
    squash result per PR ultimately landing on `develop`.
 5. After a lower-layer squash, update dependent history/bases and revalidate the
    resulting diffs before merging them. Merely retargeting can retain old commits.
@@ -149,6 +180,21 @@ required checks/protection, prefix routing, size reporting, manual-close setting
 and a tested issue/multiple-PR example. Until actually configured and exercised,
 these are required controls with pending enforcement, not claims of active CI.
 This documentation rollout changes no remote settings or workflow code.
+
+## Coordinated guide adoption
+
+Before changing a shared guide, portable snapshot or adapter version, inspect
+the canonical task assignments and affected publication inputs. Record the
+execution identity, allowed paths, exact source version and downstream owners.
+Another owner's active candidate is a dependency, not writable scope. Coordinate
+the adoption or prepare the next candidate separately; do not rewrite snapshots,
+metadata or historical proofs during an active publication.
+
+Adopt a reviewed portable workflow, development guide, managed AGENTS block,
+task template and version/hash metadata together. Preserve project-owned AGENTS
+content and unrelated local work. Validate the exact candidate using its recorded
+policy inputs, then use the repository's ordinary worktree/MR route for publication.
+Report prepared, adopted, published and remotely enforced states separately.
 
 ## Retention and cleanup
 

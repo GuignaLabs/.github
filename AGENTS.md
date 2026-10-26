@@ -49,10 +49,15 @@ as base/target, keeping trunk `develop` and one worktree per layer. Task layers
 ultimately land by squash on `develop`; release MRs promote
 `develop` to `main` with a normal merge. Never push directly to either branch.
 Read `.workspace/development.md` for the shared branch catalog, review-size bands,
-stack dependencies and manual story closure. One issue can span many PRs; do not
+stack dependencies, primary PR labels, verified owner assignment, human-only
+merges, coordinated guide adoption and manual story closure. One issue can span many PRs; do not
 require line estimates or fixed PR counts when creating it. Prefer 400 changed
 lines, warn with a reason at 401–600, and split larger work. Follow the shared
-workflow's MR readiness, current-candidate CI and review duties.
+workflow's MR readiness, current-candidate CI and review duties. Every stack
+layer needs its own primary `type:` label and verified owner assignee. Read
+back actual PR metadata, CI and auto-merge state before human handover; agents
+must not merge, enable auto-merge or schedule a merge. Preserve another
+owner's active publication inputs and coordinate portable adoption.
 After confirming the MR is merged and dependents no longer need it, preserve
 needed local files/data, remove only its owned worktree/local/remote task branch,
 and verify/update the inventory; never delete `develop` or `main`. Keep task
